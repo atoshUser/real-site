@@ -40,4 +40,40 @@ window.addEventListener("DOMContentLoaded", () => {
 
     hideTabContent();
     showTabContent();
+
+    // TIMER
+    const deadline = "2023-05-31";
+    const getRemainingTime = (endTime) => {
+        const timer = Date.parse(endTime) - Date.parse(new Date());
+        const days = Math.round(timer / (1000 * 60 * 60 * 24));
+        const hours = Math.round((timer / (1000 * 60 * 60)) % 24);
+        const minutes = Math.round((timer / (1000 * 60)) % 60);
+        const secondes = Math.round((timer / 1000) % 60);
+        return { timer, days, hours, minutes, secondes };
+    };
+
+    const getZero = (date) => {
+        return date < 10 ? "0" + date : date;
+    };
+
+    const updateClockUI = () => {
+        const eldays = document.querySelector("#days"),
+            elHours = document.querySelector("#hours"),
+            elMinutes = document.querySelector("#minutes"),
+            elSecond = document.querySelector("#seconds");
+
+        let setInterClock = setInterval(() => {
+            const { timer, days, hours, minutes, secondes } =
+                getRemainingTime(deadline);
+
+            if (timer == 0) {
+                clearInterval(setInterClock);
+            }
+            eldays.textContent = getZero(days);
+            elHours.textContent = getZero(hours);
+            elMinutes.textContent = getZero(minutes);
+            elSecond.textContent = getZero(secondes);
+        }, 1000);
+    };
+    updateClockUI();
 });
