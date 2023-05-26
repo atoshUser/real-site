@@ -92,10 +92,15 @@ window.addEventListener("DOMContentLoaded", () => {
         modal = document.querySelector(".modal"),
         modalCloseBtn = document.querySelector("[btn-close]");
 
+    const openModal = () => {
+        modal.classList.toggle("hidden");
+        document.body.classList.toggle("window-fix");
+    };
+
     modalBtnTrigger.forEach((btn) => {
         btn.addEventListener("click", () => {
-            modal.classList.toggle("hidden");
-            document.body.classList.toggle("window-fix");
+            openModal();
+            clearTimeout(setTimeModal);
         });
     });
     document.addEventListener("keydown", (e) => {
@@ -104,13 +109,15 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     });
     modalCloseBtn.addEventListener("click", () => {
-        modal.classList.toggle("hidden");
-        document.body.classList.toggle("window-fix");
+        openModal();
     });
     modal.addEventListener("click", (e) => {
         const target = e.target;
         if (target == modal) {
-            target.classList.toggle("hidden");
+            openModal();
         }
     });
+
+    // SetTimeOut modal
+    const setTimeModal = setTimeout(openModal, 4000);
 });
