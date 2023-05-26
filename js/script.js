@@ -42,13 +42,23 @@ window.addEventListener("DOMContentLoaded", () => {
     showTabContent();
 
     // TIMER
-    const deadline = "2023-05-31";
+    const deadline = "2022-05-31";
     const getRemainingTime = (endTime) => {
+        let days, hours, minutes, secondes;
         const timer = Date.parse(endTime) - Date.parse(new Date());
-        const days = Math.round(timer / (1000 * 60 * 60 * 24));
-        const hours = Math.round((timer / (1000 * 60 * 60)) % 24);
-        const minutes = Math.round((timer / (1000 * 60)) % 60);
-        const secondes = Math.round((timer / 1000) % 60);
+
+        if (timer <= 0) {
+            days = 0;
+            hours = 0;
+            minutes = 0;
+            secondes = 0;
+        } else {
+            days = Math.round(timer / (1000 * 60 * 60 * 24));
+            hours = Math.round((timer / (1000 * 60 * 60)) % 24);
+            minutes = Math.round((timer / (1000 * 60)) % 60);
+            secondes = Math.round((timer / 1000) % 60);
+        }
+
         return { timer, days, hours, minutes, secondes };
     };
 
@@ -66,7 +76,7 @@ window.addEventListener("DOMContentLoaded", () => {
             const { timer, days, hours, minutes, secondes } =
                 getRemainingTime(deadline);
 
-            if (timer == 0) {
+            if (timer <= 0) {
                 clearInterval(setInterClock);
             }
             eldays.textContent = getZero(days);
@@ -76,4 +86,31 @@ window.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     };
     updateClockUI();
+
+    // MODAL
+    const modalBtnTrigger = document.querySelectorAll("[btn-modal]"),
+        modal = document.querySelector(".modal"),
+        modalCloseBtn = document.querySelector("[btn-close]");
+
+    modalBtnTrigger.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            modal.classList.toggle("hidden");
+            document.body.classList.toggle("window-fix");
+        });
+    });
+    document.addEventListener("keydown", (e) => {
+        if (e.code == "Escape" && !modal.classList.contains("hidden")) {
+            modal.classList.toggle("hidden");
+        }
+    });
+    modalCloseBtn.addEventListener("click", () => {
+        modal.classList.toggle("hidden");
+        document.body.classList.toggle("window-fix");
+    });
+    modal.addEventListener("click", (e) => {
+        const target = e.target;
+        if (target == modal) {
+            target.classList.toggle("hidden");
+        }
+    });
 });

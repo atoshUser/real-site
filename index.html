@@ -60,8 +60,12 @@
                 <div class="header__content">
                     <h2>Central Intellegance</h2>
                     <div class="btn__group">
-                        <button class="button arrow">Read more</button>
-                        <button class="button phone">Contact Us</button>
+                        <button btn-modal class="button arrow">
+                            Read more
+                        </button>
+                        <button btn-modal class="button phone">
+                            Contact Us
+                        </button>
                     </div>
                 </div>
             </div>
@@ -222,7 +226,9 @@
                         autocomplete="off"
                     />
                     <img src="icons/right.svg" alt="right" />
-                    <button class="button phone order_btn">Contact Us</button>
+                    <button btn-modal class="button phone order_btn">
+                        Contact Us
+                    </button>
                 </form>
             </div>
         </div>
@@ -418,11 +424,11 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal">
+        <div class="modal hidden">
             <div class="modal__dialog">
                 <div class="modal__content">
                     <form action="#">
-                        <div class="modal__close">&times;</div>
+                        <div btn-close class="modal__close">&times</div>
                         <div class="modal__title">
                             Мы свяжемся с вами как можно быстрее!
                         </div>
@@ -432,12 +438,14 @@
                             name="name"
                             type="text"
                             class="modal__input"
+                            autocomplete="off"
                         />
                         <input
                             required
                             placeholder="Ваш номер телефона"
                             name="phone"
                             type="phone"
+                            autocomplete="off"
                             class="modal__input"
                         />
                         <button class="button phone modal_btn">
