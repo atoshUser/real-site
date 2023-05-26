@@ -42,7 +42,7 @@ window.addEventListener("DOMContentLoaded", () => {
     showTabContent();
 
     // TIMER
-    const deadline = "2022-05-31";
+    const deadline = "2023-05-31";
     const getRemainingTime = (endTime) => {
         let days, hours, minutes, secondes;
         const timer = Date.parse(endTime) - Date.parse(new Date());
@@ -119,5 +119,98 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
     // SetTimeOut modal
-    const setTimeModal = setTimeout(openModal, 4000);
+    //  const setTimeModal = setTimeout(openModal, 4000);
+
+    // SHOW MODAL BY SCROLL
+    const showScrollModal = () => {
+        // window innerheight take our nout height
+        // window scrollY take when we scroll site height
+        // document.documentElement.scrollHeigth take our full site height
+        let windowHeight = window.innerHeight,
+            scrollPosition = window.scrollY,
+            documentHeight = document.documentElement.scrollHeight;
+
+        if (scrollPosition + windowHeight >= documentHeight) {
+            openModal();
+            window.removeEventListener("scroll", showScrollModal);
+        }
+    };
+    window.addEventListener("scroll", showScrollModal);
+
+    // CLASS
+
+    class MenuCard {
+        constructor(src, alt, title, descr, price, parentSelector) {
+            this.src = src;
+            this.alt = alt;
+            this.title = title;
+            this.descr = descr;
+            this.parentSelector = document.querySelector(parentSelector);
+            this.price = price;
+            this.transfer = 11450;
+        }
+
+        chengeToUZS() {
+            return (this.price *= this.transfer);
+        }
+        render() {
+            const element = document.createElement("div");
+            element.classList.add("menu__item");
+            element.innerHTML = `
+            <img src= ${this.src} alt=${this.alt} />
+            <h3 class="menu__item-subtitle">${this.title}</h3>
+            <div class="menu__item-descr">
+              ${this.descr}
+            </div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+                <div class="menu__item-cost">Price:</div>
+                <div class="menu__item-total">
+                    <span>${this.chengeToUZS()}</span> uzs/month
+                </div>
+            </div>
+
+             `;
+
+            this.parentSelector.append(element);
+        }
+    }
+    new MenuCard(
+        `img/tabs/1.png`,
+        `vegy`,
+        `Plan "Usual"`,
+        `  Lorem ipsum, dolor sit amet consectetur adipisicing
+    elit. Fugit nesciunt facere, sequi exercitationem
+    praesentium ab cupiditate beatae debitis
+    perspiciatis itaque quaerat id modi corporis
+    delectus ratione nobis harum voluptatum in.`,
+        10,
+        ".menu .container"
+    ).render();
+
+    new MenuCard(
+        `img/tabs/2.jpg`,
+        `elite`,
+        `Plan “Premium”`,
+        ` Lorem ipsum dolor sit amet consectetur adipisicing
+    elit. Itaque aliquid molestiae, sit eveniet, tempora
+    ipsum quaerat recusandae sapiente doloremque
+    corporis dolores quas consectetur ut labore
+    distinctio libero reiciendis harum sequi?`,
+        15,
+        `.menu .container`
+    ).render();
+
+    new MenuCard(
+        `img/tabs/3.jpg`,
+        `post`,
+        `Plan "VIP"`,
+        `   Lorem ipsum dolor, sit amet consectetur adipisicing
+    elit. Voluptatibus natus nobis minus corporis atque
+    enim vitae, modi eligendi commodi itaque voluptatum
+    ipsum. Nemo reiciendis, id rem dolorum rerum
+    consequuntur eos.`,
+        12,
+        `.menu .container`
+    ).render();
 });
