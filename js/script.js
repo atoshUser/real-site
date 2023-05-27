@@ -140,11 +140,12 @@ window.addEventListener("DOMContentLoaded", () => {
     // CLASS
 
     class MenuCard {
-        constructor(src, alt, title, descr, price, parentSelector) {
+        constructor(src, alt, title, descr, price, parentSelector, ...clases) {
             this.src = src;
             this.alt = alt;
             this.title = title;
             this.descr = descr;
+            this.clases = clases;
             this.parentSelector = document.querySelector(parentSelector);
             this.price = price;
             this.transfer = 11450;
@@ -155,7 +156,15 @@ window.addEventListener("DOMContentLoaded", () => {
         }
         render() {
             const element = document.createElement("div");
-            element.classList.add("menu__item");
+            // here we should check our object element class
+            if (this.clases.length == 0) {
+                element.className = "menu__item";
+            } else {
+                this.clases.forEach((item) => {
+                    element.classList.add(item);
+                });
+            }
+            //
             element.innerHTML = `
             <img src= ${this.src} alt=${this.alt} />
             <h3 class="menu__item-subtitle">${this.title}</h3>
@@ -175,6 +184,8 @@ window.addEventListener("DOMContentLoaded", () => {
             this.parentSelector.append(element);
         }
     }
+
+    ///
     new MenuCard(
         `img/tabs/1.png`,
         `vegy`,
@@ -185,9 +196,22 @@ window.addEventListener("DOMContentLoaded", () => {
     perspiciatis itaque quaerat id modi corporis
     delectus ratione nobis harum voluptatum in.`,
         10,
-        ".menu .container"
+        `.menu .container`
     ).render();
 
+    new MenuCard(
+        `img/tabs/3.jpg`,
+        `post`,
+        `Plan "VIP"`,
+        `Lorem ipsum dolor, sit amet consectetur adipisicing
+    elit. Voluptatibus natus nobis minus corporis atque
+    enim vitae, modi eligendi commodi itaque voluptatum
+    ipsum. Nemo reiciendis, id rem dolorum rerum
+    consequuntur eos.`,
+        12,
+        `.menu .container`,
+        `menu__item`
+    ).render();
     new MenuCard(
         `img/tabs/2.jpg`,
         `elite`,
@@ -198,19 +222,7 @@ window.addEventListener("DOMContentLoaded", () => {
     corporis dolores quas consectetur ut labore
     distinctio libero reiciendis harum sequi?`,
         15,
-        `.menu .container`
-    ).render();
-
-    new MenuCard(
-        `img/tabs/3.jpg`,
-        `post`,
-        `Plan "VIP"`,
-        `   Lorem ipsum dolor, sit amet consectetur adipisicing
-    elit. Voluptatibus natus nobis minus corporis atque
-    enim vitae, modi eligendi commodi itaque voluptatum
-    ipsum. Nemo reiciendis, id rem dolorum rerum
-    consequuntur eos.`,
-        12,
-        `.menu .container`
+        `.menu .container`,
+        `menu__item`
     ).render();
 });
