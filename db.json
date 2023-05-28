@@ -1,0 +1,125 @@
+{
+  "menu": [
+    {
+      "img": "img/tabs/1.png",
+      "altimg": "vegy",
+      "title": "Plan 'Usual'",
+      "descrp": " askldnklasndknasl kljljdflsjlfjsjf iidhjfdsfijdsjf sdijc  jaopfjaso jdjasojkd jsdnjnaslndasldjasjdjaslj asdskajdkjaskjd k asmdasmkdmask jkjkj kjdkjasjdasj sakdmsakmdm",
+      "price": 20
+    },
+    {
+      "img": "img/tabs/3.jpg",
+      "altimg": "post",
+      "title": "Plan 'VIP'",
+      "descrp": " askldnklasndknasl kljljdflsjlfjsjf iidhjfdsfijdsjf sdijc  jaopfjaso jdjasojkd jsdnjnaslndasldjasjdjaslj asdskajdkjaskjd k asmdasmkdmask jkjkj kjdkjasjdasj sakdmsakmdm",
+      "price": 15
+    },
+    {
+      "img": "img/tabs/2.jpg",
+      "altimg": "elite",
+      "title": "Plan 'Premium'",
+      "descrp": " askldnklasndknasl kljljdflsjlfjsjf iidhjfdsfijdsjf sdijc  jaopfjaso jdjasojkd jsdnjnaslndasldjasjdjaslj asdskajdkjaskjd k asmdasmkdmask jkjkj kjdkjasjdasj sakdmsakmdm",
+      "price": 19
+    }
+  ],
+  "request": [
+    {
+      "name": "Anora",
+      "phone": "979845566",
+      "id": 1
+    },
+    {
+      "name": "Sevinch",
+      "phone": "905556412",
+      "id": 2
+    },
+    {
+      "name": "Sevinch",
+      "phone": "6544654",
+      "id": 3
+    },
+    {
+      "name": "Anora",
+      "phone": "65445648",
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6
+    },
+    {
+      "name": "Diyor",
+      "phone": "6448448",
+      "id": 7
+    },
+    {
+      "name": "Nafisa",
+      "phone": "68455",
+      "id": 8
+    },
+    {
+      "name": "Umida",
+      "phone": "00000",
+      "id": 9
+    },
+    {
+      "name": "asdad",
+      "phone": "324234",
+      "id": 10
+    },
+    {
+      "name": "Soliha",
+      "phone": "1111",
+      "id": 11
+    },
+    {
+      "name": "Anora",
+      "phone": "0202",
+      "id": 12
+    },
+    {
+      "name": "Asad",
+      "phone": "222",
+      "id": 13
+    },
+    {
+      "name": "wwww",
+      "phone": "2323",
+      "id": 14
+    },
+    {
+      "name": "Shahnoza",
+      "phone": "002223",
+      "id": 15
+    },
+    {
+      "name": "Sevinch",
+      "phone": "98",
+      "id": 16
+    },
+    {
+      "id": 17
+    },
+    {
+      "id": 18
+    },
+    {
+      "id": 19
+    },
+    {
+      "id": 20
+    },
+    {
+      "name": "Sevinch",
+      "phone": "77",
+      "id": 21
+    },
+    {
+      "name": "Anora",
+      "phone": "9989565",
+      "id": 22
+    }
+  ]
+}

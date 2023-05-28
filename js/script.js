@@ -89,8 +89,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // MODAL
     const modalBtnTrigger = document.querySelectorAll("[btn-modal]"),
-        modal = document.querySelector(".modal"),
-        modalCloseBtn = document.querySelector("[btn-close]");
+        modal = document.querySelector(".modal");
 
     const openModal = () => {
         modal.classList.toggle("hidden");
@@ -108,18 +107,17 @@ window.addEventListener("DOMContentLoaded", () => {
             modal.classList.toggle("hidden");
         }
     });
-    modalCloseBtn.addEventListener("click", () => {
-        openModal();
-    });
+
     modal.addEventListener("click", (e) => {
         const target = e.target;
-        if (target == modal) {
+
+        if (target == modal || target.getAttribute("btn-close") == "") {
             openModal();
         }
     });
 
     // SetTimeOut modal
-    //  const setTimeModal = setTimeout(openModal, 4000);
+    const setTimeModal = setTimeout(openModal, 8000);
 
     // SHOW MODAL BY SCROLL
     const showScrollModal = () => {
@@ -209,8 +207,7 @@ window.addEventListener("DOMContentLoaded", () => {
     ipsum. Nemo reiciendis, id rem dolorum rerum
     consequuntur eos.`,
         12,
-        `.menu .container`,
-        `menu__item`
+        `.menu .container`
     ).render();
     new MenuCard(
         `img/tabs/2.jpg`,
@@ -225,4 +222,74 @@ window.addEventListener("DOMContentLoaded", () => {
         `.menu .container`,
         `menu__item`
     ).render();
+
+    // FORM
+
+    const forms = document.querySelectorAll("form");
+    forms.forEach((form) => {
+        bindPostData(form);
+    });
+    console.log(forms);
+    const msg = {
+        loading: "Loading...",
+        success: `Thanks for submating our form`,
+        fail: `Something went wrong`,
+    };
+    async function postData(url, data) {
+        const request = await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: data,
+        });
+
+        return await request.json();
+    }
+    function bindPostData(formEl) {
+        formEl.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const statusMessage = document.createElement("div");
+            statusMessage.textContent = msg.loading;
+            formEl.append(statusMessage);
+
+            const formData = new FormData(formEl);
+            const json = JSON.stringify(Object.fromEntries(formData.entries()));
+            console.log(json);
+            postData("http://localhost:3000/request", json)
+                .then((data) => {
+                    console.log(data);
+                    showThanksModal(msg.success);
+                    statusMessage.remove();
+                })
+                .catch(() => {
+                    showThanksModal(msg.fail);
+                })
+                .finally(() => {
+                    formEl.reset();
+                });
+        });
+    }
+
+    // SHOW THANKS MODAL
+    function showThanksModal(message) {
+        const prevModalDialog = document.querySelector(".modal__dialog");
+        prevModalDialog.classList.toggle("hidden");
+        const thanksModal = document.createElement("div");
+        thanksModal.classList.add("modal__dialog");
+        thanksModal.innerHTML = `
+        <div class="modal__content">
+           <div btn-close class="modal__close">&times</div>
+            <div class="modal__title">
+                ${message}
+            </div>
+            </div>
+        `;
+        document.querySelector(".modal").append(thanksModal);
+        setTimeout(() => {
+            thanksModal.remove();
+            prevModalDialog.classList.toggle("hidden");
+            openModal();
+        }, 4000);
+    }
 });
