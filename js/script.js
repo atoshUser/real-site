@@ -182,46 +182,19 @@ window.addEventListener("DOMContentLoaded", () => {
             this.parentSelector.append(element);
         }
     }
-
-    ///
-    new MenuCard(
-        `img/tabs/1.png`,
-        `vegy`,
-        `Plan "Usual"`,
-        `  Lorem ipsum, dolor sit amet consectetur adipisicing
-    elit. Fugit nesciunt facere, sequi exercitationem
-    praesentium ab cupiditate beatae debitis
-    perspiciatis itaque quaerat id modi corporis
-    delectus ratione nobis harum voluptatum in.`,
-        10,
-        `.menu .container`
-    ).render();
-
-    new MenuCard(
-        `img/tabs/3.jpg`,
-        `post`,
-        `Plan "VIP"`,
-        `Lorem ipsum dolor, sit amet consectetur adipisicing
-    elit. Voluptatibus natus nobis minus corporis atque
-    enim vitae, modi eligendi commodi itaque voluptatum
-    ipsum. Nemo reiciendis, id rem dolorum rerum
-    consequuntur eos.`,
-        12,
-        `.menu .container`
-    ).render();
-    new MenuCard(
-        `img/tabs/2.jpg`,
-        `elite`,
-        `Plan “Premium”`,
-        ` Lorem ipsum dolor sit amet consectetur adipisicing
-    elit. Itaque aliquid molestiae, sit eveniet, tempora
-    ipsum quaerat recusandae sapiente doloremque
-    corporis dolores quas consectetur ut labore
-    distinctio libero reiciendis harum sequi?`,
-        15,
-        `.menu .container`,
-        `menu__item`
-    ).render();
+    // AXIOS orqali server request jonatish
+    axios.get("http://localhost:3000/menu").then((data) => {
+        data.data.forEach(({ img, altimg, title, descrp, price }) => {
+            new MenuCard(
+                img,
+                altimg,
+                title,
+                descrp,
+                price,
+                ".menu .container"
+            ).render();
+        });
+    });
 
     // FORM
 
@@ -254,8 +227,9 @@ window.addEventListener("DOMContentLoaded", () => {
             formEl.append(statusMessage);
 
             const formData = new FormData(formEl);
-            const json = JSON.stringify(Object.fromEntries(formData.entries()));
-            console.log(json);
+            // const json = JSON.stringify(Object.fromEntries(formData.entries()));
+            const json = JSON.stringify(Object.fromEntries(formData));
+
             postData("http://localhost:3000/request", json)
                 .then((data) => {
                     console.log(data);
