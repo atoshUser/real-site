@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
             this.parentSelector.append(element);
         }
     }
-    // AXIOS orqali server request jonatish
+    // AXIOS orqali server response olish
     axios.get("http://localhost:3000/menu").then((data) => {
         data.data.forEach(({ img, altimg, title, descrp, price }) => {
             new MenuCard(
@@ -266,4 +266,36 @@ window.addEventListener("DOMContentLoaded", () => {
             openModal();
         }, 4000);
     }
+
+    // SLIDES
+    let sliders = document.querySelectorAll(".offer__slide");
+    let next = document.querySelector(".offer__slider-next");
+    let prev = document.querySelector(".offer__slider-prev");
+
+    let slideIndex = 1;
+    const showSlide = (idx) => {
+        if (idx > sliders.length) {
+            slideIndex = 1;
+        }
+        if (idx < 1) {
+            slideIndex = sliders.length;
+        }
+        sliders.forEach((item) => {
+            item.classList.add("hide");
+        });
+        sliders[slideIndex - 1].classList.remove("hide");
+    };
+    showSlide(slideIndex);
+
+    const controlSlide = (idx) => {
+        showSlide((slideIndex += idx));
+    };
+    next.addEventListener("click", () => {
+        controlSlide(1);
+        console.log("next");
+    });
+    prev.addEventListener("click", () => {
+        controlSlide(-1);
+        console.log("prev");
+    });
 });
