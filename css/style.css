@@ -809,3 +809,29 @@ section {
         transform: rotateX(20deg) translateY(-30px);
     }
 }
+
+.carousel-indicators {
+    position: relative;
+    right: 0;
+    bottom: 20px;
+    left: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    gap: 3px;
+    margin: 0 auto;
+}
+
+.carousel-dot {
+    box-sizing: border-box;
+    flex: 0 1 auto;
+    width: 30px;
+    height: 6px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 10px solid transparent;
+    opacity: 50%;
+    transition: opacity 0.5s ease;
+}

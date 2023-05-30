@@ -275,6 +275,7 @@ window.addEventListener("DOMContentLoaded", () => {
     let total = document.querySelector("#total");
     let slidesWrapper = document.querySelector(".offer__slider-wrapper");
     let slidesInner = document.querySelector(".offer__slider-inner");
+    let offerSlider = document.querySelector(".offer__slider");
     let widthSlidesWrapper = Math.round(
         window.getComputedStyle(slidesWrapper).width.slice(0, -2)
     );
@@ -290,7 +291,22 @@ window.addEventListener("DOMContentLoaded", () => {
     sliders.forEach((val) => {
         val.style.width = widthSlidesWrapper + "px";
     });
-    let slideIndex = 0;
+
+    const indicator = document.createElement("ol");
+    indicator.classList.add("carousel-indicators");
+    offerSlider.insertAdjacentElement("beforeend", indicator);
+    const dots = [];
+    for (let i = 0; i < sliders.length; i++) {
+        const dot = document.createElement("li");
+        dot.setAttribute("data-slide-to", i + 1);
+        dot.classList.add("carousel-dot");
+        indicator.appendChild(dot);
+        dots.push(dot);
+        if (i == 0) {
+            dot.style.opacity = 1;
+        }
+    }
+    let slideIndex = 1;
     const changeCurrentText = (idx) => {
         slideIndex += idx;
         if (slideIndex <= 0) {
@@ -302,6 +318,10 @@ window.addEventListener("DOMContentLoaded", () => {
         } else {
             current.textContent = getZero(slideIndex);
         }
+        dots.forEach((dot) => {
+            dot.style.opacity = "0.5";
+        });
+        dots[slideIndex - 1].style.opacity = "1";
     };
 
     prev.addEventListener("click", () => {
