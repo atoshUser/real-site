@@ -323,6 +323,18 @@ window.addEventListener("DOMContentLoaded", () => {
         });
         dots[slideIndex - 1].style.opacity = "1";
     };
+    dots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+            let result = dot.getAttribute("data-slide-to");
+            current.textContent = getZero(result);
+            let slide = widthSlidesWrapper * (result - 1);
+            slidesInner.style.transform = `translateX(-${slide}px)`;
+            dots.forEach((val) => {
+                val.style.opacity = "0.5";
+            });
+            dot.style.opacity = "1";
+        });
+    });
 
     prev.addEventListener("click", () => {
         if (slideTotal == widthSlidesWrapper * (sliders.length - 1)) {
